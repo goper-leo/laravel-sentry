@@ -1,0 +1,29 @@
+{
+    "name": "eetechmedia/sentry",
+    "description": "Your package description here",
+    "authors": [{
+        "name": "Goper Zosa",
+        "email": "goper@eetechmedia.com"
+    }],
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eetechmedia\\Sentry\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EETechMedia\\Sentry\\SentryServiceProvider"
+            ],
+            "aliases": {
+                "Sentry": "EETechMedia\\Sentry\\SentryFacade"
+            }
+        }
+    }
+}
