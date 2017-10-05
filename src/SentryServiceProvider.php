@@ -13,7 +13,7 @@ class SentryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('sentry', function () {
-            return $this->app->make('EETechMedia\Sentry\sentry');
+            return $this->app->make('EETechMedia\Sentry\Sentry');
         });
     }
 
@@ -25,5 +25,10 @@ class SentryServiceProvider extends ServiceProvider
     public function boot()
     {
         // Add resources here...
+        $this->publishes([
+            __DIR__.'/config/sentry.php' => config_path('sentry.php'),
+        ]);
+
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
 }
