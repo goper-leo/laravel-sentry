@@ -9,9 +9,6 @@ return [
     |
     |
     */
-
-    'table_name' => 'project_views',
-
     'viewer_details' => [
         'ip_address',
         'country',

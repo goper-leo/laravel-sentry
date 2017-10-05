@@ -29,6 +29,6 @@ class SentryServiceProvider extends ServiceProvider
             __DIR__.'/config/sentry.php' => config_path('sentry.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
 }

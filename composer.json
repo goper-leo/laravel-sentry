@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Eetechmedia\\Sentry\\": "src/"
+            "EETechMedia\\Sentry\\": "src/"
         }
     },
     "minimum-stability": "dev",
