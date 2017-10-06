@@ -27,6 +27,7 @@ class SentryServiceProvider extends ServiceProvider
         // Add resources here...
         $this->publishes([
             __DIR__.'/config/sentry.php' => config_path('sentry.php'),
+            __DIR__.'/config/geoip.php' => config_path('geoip.php')
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/migrations');
