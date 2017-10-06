@@ -9,7 +9,7 @@ use EETechMedia\Sentry\Models\Sentry as SentryModel;
 use EETechMedia\Sentry\Traits\Possess;
 
 /**
- * Sentr Main class
+ * Sentry Main class
  * @author goper
  */
 class Sentry
