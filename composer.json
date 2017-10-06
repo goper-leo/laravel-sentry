@@ -1,6 +1,7 @@
 {
-    "name": "goper/laravel-sentry",
-    "description": "Your package description here",
+    "name": "goper-leo/laravel-sentry",
+    "description": "Record visitor views on articles/project or your site with extra details for monitoring.",
+    "keywords": ["laravel", "sentry", "laravel sentry", "goper", "user view", "laravel user view"],
     "authors": [{
         "name": "Goper Zosa",
         "email": "goper@eetechmedia.com"

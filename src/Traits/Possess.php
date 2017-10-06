@@ -41,6 +41,8 @@ trait Possess
                 return '';
             }
         }
+
+        return '';
     }
 
     /**
@@ -60,7 +62,7 @@ trait Possess
      * @param  [type]  $key [description]
      * @return string $value
      */
-    public function _has($key)
+    private function _has($key)
     {
         if ($this->_keyOccur($key)) {
             return $this->ward[$key];
@@ -99,5 +101,25 @@ trait Possess
         }
 
         return false;
+    }
+
+    /**
+     * Get viewer identity on the `$ward` if `user_id` exists or not
+     * if not exist use ip as identifier
+     *
+     * @return array $identifier
+     */
+    private function _getViewerIdentity()
+    {
+        $identifier = [];
+        $_user = $this->_getUserId();
+        
+        if ($_user != '') {
+            $identifier = ['user_id' => $_user];
+        } else {
+            $identifier = ['ip' => $this->_getObserIp()];
+        }
+
+        return $identifier;
     }
 }

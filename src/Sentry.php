@@ -10,6 +10,8 @@ use EETechMedia\Sentry\Traits\Possess;
 
 /**
  * Sentry Main class
+ *
+ * @TODO Create config that can be set to add redundant user like `daily`, 'monthly' etc
  * @author goper
  */
 class Sentry
@@ -74,14 +76,17 @@ class Sentry
     {
         $this->ward = $ward;
 
-        $sentry = $this->sentry;
-        $sentry->base_id = $this->_getBaseId();
-        $sentry->url = $this->_has('url');
-        $sentry->user_id = $this->_getUserId();
+        // Check if this user already viewed this page/article/project
+        if ($this->_checkObserverUnique()) {
+            $sentry = $this->sentry;
+            $sentry->base_id = $this->_getBaseId();
+            $sentry->url = $this->_has('url');
+            $sentry->user_id = $this->_getUserId();
 
-        $sentry->ip = $this->request->ip();
-        $sentry->details = $this->getObserverDetails();
-        $sentry->save();
+            $sentry->ip = $this->_getObserIp();
+            $sentry->details = $this->getObserverDetails();
+            $sentry->save();
+        }
     }
 
     /**
@@ -236,5 +241,40 @@ class Sentry
         return false;
     }
 
+    /**
+     * Check this observer / viewer if already exist on table
+     *
+     * @return [type] [description]
+     */
+    private function _checkObserverUnique()
+    {
+        $checker;
+        $identifier = $this->_getViewerIdentity();
+
+        if ($this->_getBaseId() == '') {
+            // No base_id therefore expected primary is the `url`
+            $checker = $this->sentry->where(array_merge(['url' => $this->ward['url']], $identifier))->count();
+
+        } else {
+            // Use base_id as primary key
+            $baseId = $this->_getBaseId();
+            $checker = $this->sentry->where(array_merge(['base_id' =>$baseId], $identifier))->count();
+        }
+
+        if ($checker > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Get observer ip address
+     * @return string $ip_address
+     */
+    private function _getObserIp()
+    {
+        return $this->request->ip();
+    }
 
 }
