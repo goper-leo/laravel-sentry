@@ -68,4 +68,36 @@ trait Possess
             return '';
         }
     }
+
+    /**
+     * Get primary key that are defined either base_id or url
+     * @param  [type] $parameters [description]
+     * @return string $column
+     */
+    public function _identifyPrimaryKey($primary_key)
+    {
+        // Identify $primary_key is a string or can be an int
+        if (is_numeric($primary_key)) {
+            // This is a base_id it is numeric
+            $column = 'base_id';
+        } else {
+            // Use url as primary key
+            $column = 'url';
+        }
+
+        return $column;
+    }
+
+    /**
+     * Identify `$dateRange` variable is in date only or date with time
+     * @return string $date
+     */
+    private function _isDateOnly($date)
+    {
+        if (!str_contains($date, ':')) {
+            return true;
+        }
+
+        return false;
+    }
 }
